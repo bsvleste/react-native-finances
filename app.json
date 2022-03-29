@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "bsvfinances",
+    "slug": "bsvfinances",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
