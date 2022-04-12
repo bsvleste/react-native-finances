@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { 
     Container, 
     Header,
@@ -15,48 +15,48 @@ import {
      TransacionList} from "./styles";
 import { HighlightCard } from './../../components/HighlightCard/index';
 import { TransactionsCard,TransactionCardProps } from "../../components/TransactionCard";
+import AsyncStorageLib from "@react-native-async-storage/async-storage";
 
 export interface DataListProps extends TransactionCardProps {
     id: string;
   }
 
 export function Dashboard(){
-    const data:DataListProps[]= [
-        {
-            id:'1',
-            type:'positive',
-            title:'Desenvolvimento de site',
-            amount:"R$ 12.000,00",
-            category:{
-                name:"Vendas",
-                icon:"dollar-sign"
-            },
-            date:"13/03/2020"
-        },
-        {
-            id:'2',
-            type:'negative',
-            title:'Aluguel de casa',
-            amount:"R$ 1.000,00",
-            category:{
-                name:"Vendas",
-                icon:"shopping-bag"
-            },
-            date:"13/03/2020"
-        },
-        {
-            id:'3',
-            type:'positive',
-            title:'Desenvolvimento de site',
-            amount:"R$ 12.000,00",
-            category:{
-                name:"Vendas",
-                icon:"crosshair"
-            },
-            date:"13/03/2020"
+    const dataKey = '@bsvfinaces:transactions';
+    const [data,setData] = useState<DataListProps[]>([])
+    useEffect(()=>{
+        async function clearData(){
+            await AsyncStorageLib.removeItem(dataKey)
         }
-    ]
-    
+        async function loadData(){
+          const res = await AsyncStorageLib.getItem(dataKey)
+            const transactions =res?JSON.parse(res):[]
+            const transactionsFormatted:DataListProps[] = transactions
+            .map((item:DataListProps)=>{
+                const amount = Number(item.amount)
+                .toLocaleString('pt-BR',{
+                    style:'currency',
+                    currency:'BRL'
+                })            
+                const date = Intl.DateTimeFormat('pt-Br',{
+                    day:'2-digit',
+                    month:'2-digit',
+                    year:'2-digit'
+                    }).format(new Date(item.date))
+                    return{
+                        id:item.id,
+                        name:item.name,
+                        amount,
+                        type:item.type,
+                        category:item.category,
+                        date
+                    }
+                }) 
+                setData(transactionsFormatted)  
+                console.log(transactionsFormatted)          
+        }
+        loadData();
+    },[])
     return (
         <Container>
             <Header>
