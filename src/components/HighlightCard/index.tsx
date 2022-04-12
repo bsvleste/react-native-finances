@@ -6,6 +6,7 @@ interface HighlightCardProps {
     title: string;
     amount: string;
     lastTransaction: string;
+   
   }
   const icon = {
     up: "arrow-up-circle",
@@ -18,6 +19,7 @@ export function HighlightCard({
     title,
     amount,
     lastTransaction,
+   
   }: HighlightCardProps): JSX.Element {
     return(
         <Container type={type}>
