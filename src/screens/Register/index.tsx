@@ -4,7 +4,7 @@ import { useForm }from 'react-hook-form'
 import { Button } from "../../components/Forms/Button";
 import { InputForm } from "../../components/Forms/InputForm";
 import { TransactionTypeButton } from "../../components/Forms/TransactionTypeButton";
-import { Container,Header,Title,Form,Fields,TransactionTypes } from "./styles";
+import { Container,Form,Fields,TransactionTypes } from "./styles";
 import { CategorySelect} from "../CategorySelect";
 import { CategorySelectButton} from "../../components/Forms/CategorySelectButton";
 import * as Yup from 'yup';
@@ -12,6 +12,7 @@ import {yupResolver} from '@hookform/resolvers/yup'
 import AsyncStorageLib from "@react-native-async-storage/async-storage";
 import  uuid from 'react-native-uuid'
 import { useNavigation } from "@react-navigation/native";
+import { Header } from "../../components/Header";
 interface FormData{
     name:string;
     amount:string
@@ -88,9 +89,7 @@ export function Register(){
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss }>
             <Container>
-                <Header>
-                    <Title>Cadastro</Title>
-                </Header>
+               <Header title="Cadastrar"/>
                 <Form>
                     <Fields>
                         <InputForm 

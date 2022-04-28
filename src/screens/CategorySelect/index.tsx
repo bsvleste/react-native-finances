@@ -1,8 +1,9 @@
 import React from 'react';
-import { Container,Header,Title,Category,Icon,Name, Separator,Footer} from './styles';
+import { Container,Title,Category,Icon,Name, Separator,Footer} from './styles';
 import {categories} from '../../utils/categories';
 import { FlatList } from 'react-native';
 import { Button } from '../../components/Forms/Button';
+import { Header } from '../../components/Header';
 
 interface ICategory{
     key:string,
@@ -21,9 +22,7 @@ export function CategorySelect({category,setCategory,closeSelectCategory}:Catego
     
     return (
         <Container>
-            <Header>
-                <Title>Categorias</Title>
-            </Header>
+            <Header title="Categorias" />
             <FlatList
                 data={categories}
                 style={{flex:1,width:'100%'}}

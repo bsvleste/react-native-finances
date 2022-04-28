@@ -20,15 +20,15 @@ export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
           <StatusBar        
-          translucent={true}
-          backgroundColor="rgba(255,225,255,0.2)"               
+            translucent={true}
+            backgroundColor="rgba(255,225,255,0.2)"               
           />
           <ThemeProvider theme={theme}>
           <NavigationContainer>
             <AppRoutes />
           </NavigationContainer>
           </ThemeProvider>
-        </SafeAreaView>
+    </SafeAreaView>
   );
 }
 
